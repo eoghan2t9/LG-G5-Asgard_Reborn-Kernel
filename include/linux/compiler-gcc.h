@@ -245,7 +245,6 @@
  */
 #define __no_sanitize_address __attribute__((no_sanitize_address))
 #endif
-
 #endif	/* gcc version >= 40000 specific checks */
 
 #if !defined(__noclone)

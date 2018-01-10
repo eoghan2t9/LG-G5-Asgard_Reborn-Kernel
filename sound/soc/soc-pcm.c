@@ -360,7 +360,7 @@ static void soc_pcm_apply_msb(struct snd_pcm_substream *substream)
 {
 	struct snd_soc_pcm_runtime *rtd = substream->private_data;
 	struct snd_soc_dai *cpu_dai = rtd->cpu_dai;
-	struct snd_soc_dai *codec_dai;
+	struct snd_soc_dai *codec_dai = NULL;
 	int i;
 	unsigned int bits = 0, cpu_bits;
 
@@ -781,6 +781,12 @@ static int soc_pcm_prepare(struct snd_pcm_substream *substream)
 				goto out;
 			}
 		}
+	}
+
+	if (!codec_dai) {
+		dev_err(codec_dai->dev, "ASoC: DAI not found\n");
+		ret = -EINVAL;
+		goto out;
 	}
 
 	if (cpu_dai->driver->ops && cpu_dai->driver->ops->prepare) {

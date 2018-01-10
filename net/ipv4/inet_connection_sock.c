@@ -169,6 +169,7 @@ again:
 		snum = rover;
 	} else {
 have_snum:
+
 		head = &hashinfo->bhash[inet_bhashfn(net, snum,
 				hashinfo->bhash_size)];
 		spin_lock(&head->lock);
